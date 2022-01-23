@@ -5,6 +5,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+
 #define new_max(x,y) (((x) >= (y)) ? (x) : (y))
 #define new_min(x,y) (((x) <= (y)) ? (x) : (y))
 #define rep(i, l, r) for (int i = l; i < r; i++)
@@ -27,7 +28,15 @@ const double pi = atan2(0, -1);
     
     
 
+int manHattanDistance(int a, int b, int m, int l)
+{
+    return new_max(a-m, m-a) + new_max(b-l, l-b);
+}
 
+int cornerDistance(int a, int b, int n, int m)
+{
+    return new_min(new_min(manHattanDistance(a, b, 0, 0), manHattanDistance(a, b, 0, m)), new_min(manHattanDistance(a,b,n,0), manHattanDistance(a,b,n,m)));
+}
     
     
 int main(){
@@ -37,11 +46,16 @@ int main(){
     cin >> t;
     while(t--)
     {
-        int _n, _m;
-        cin >> _n >> _m;
-        int n = new_min(_n, _m);
-        int m = new_max(_n, _m);
-        
+        int n, m, k;
+        cin >> n >> m;
+        vector<int> v;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++)
+                v.push_back(max(i, n-i-1) + max(j, m-j-1));
+        sort(v.begin(), v.end());
+        for(auto i : v)
+            cout << i << " ";
+        cout << "\n";
     }
     return 0;
 }

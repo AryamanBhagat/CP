@@ -28,7 +28,14 @@ const double pi = atan2(0, -1);
 
 
     
-    
+
+
+
+vector < int > G[100010];
+vector <int> assignedValue;
+
+
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -39,22 +46,19 @@ int main(){
     {
         int n;
         cin >> n;
-        vector<int> a[n];
-        bool impossible = false;
-        int us[n-1];
-        int vs[n-1];
-        for(int i = 0 i < n-1; i++)
+        for(int i = 0; i < n; i++)
         {
-            int u, v;
-            cin >> u >> v;
-            a[u-1].push_back(v-1);
-            a[v-1].push_back(u-1);
-            if(a[u-1].size()>2 || a[v-1].size()>2)
-                impossible = true;
-            us[i] = u-1;
-            vs[i] = v-1;
+            G[i].clear();
+            assignedValue = 0;
         }
-
+        int u, v;
+        for(int i = 0; i < n-1; i++)
+        {
+            cin >> u >> v;
+            G[u-1].push_back(v);
+            G[v-1].push_back(u);
+        }
+        
 
 
     }

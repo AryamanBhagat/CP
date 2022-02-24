@@ -1,6 +1,6 @@
 // AryamanBhagat 
-// 2022-01-30 
-// 20:04:46
+// 2022-02-24 
+// 12:02:58
 
 #include <bits/stdc++.h>
 
@@ -25,8 +25,11 @@ const int MOD3 = 998244353;
     
 const double pi = atan2(0, -1);
     
+int sqr(int x)
+{
+    return x*x;
+}
     
-
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -36,26 +39,33 @@ int main(){
     {
         int n;
         cin >> n;
-        //find largest value of two that it has
         int a[n];
-        int dp[n];
+        int b[n];
         for(int i = 0; i < n; i++)
-        {
-            dp[i] = 0;
             cin >> a[i];
+        for(int i = 0; i < n; i++)
+            cin >> b[i];
+        int sumMin = 0, sumMax = 0, sumSq = 0;
+        for (int i = 0; i < n; i++) {
+            if (a[i] > b[i])
+                swap(a[i], b[i]);
+    
+            sumSq += sqr(a[i]) + sqr(b[i]);
+            sumMin += a[i];
+            sumMax += b[i];
         }
-        long sum = 0;
-        dp[0] = a[0] ? 0 : 1;
-        for(int i = 1; i < n; i++)
-        {
-            dp[i] = a[i]?0:1;
-            for(int j = i-1; j >= 0; j--)
-            {
-                dp[i] += dp[j];
-            }
-            sum += dp[i];
-        }
-        cout << sum << "\n";
+
+        bitset<(100*100) + 10> dp;
+        dp[0] = 1;
+        for (int i = 0; i < n; i++)
+            dp |= dp << (b[i] - a[i]);
+
+        int ans = sqr(sumMin) + sqr(sumMax);
+        for (int i = 0; i <= sumMax - sumMin; i++)
+            if (dp[i])
+                ans = min(ans, sqr(sumMin + i) + sqr(sumMax - i));
+    
+        cout << sumSq * (n - 2) + ans << '\n';
         
     }
     return 0;

@@ -1,6 +1,6 @@
-// $%U%$ 
-// $%Y%$-$%M%$-$%D%$ 
-// $%h%$:$%m%$:$%s%$
+// AryamanBhagat 
+// 2022-02-24 
+// 11:40:48
 
 #include <bits/stdc++.h>
 
@@ -29,6 +29,44 @@ const double pi = atan2(0, -1);
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int a[n];
+        bool allOnes = true;
+        int ones = 0;
+        int twos = 0;
+        long long int sum = 0;
+        for(int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            
+            if(i > 0 && i < n-1)
+            {
+                sum += (a[i] +1)/2;
+                if(a[i] != 1)
+                {
+                    allOnes = false;
+                }
+            }
+        }
+        if(n == 3 && a[1]%2 == 1)
+        {
+            cout << "-1";
+        }
+        else if(allOnes)
+        {
+            cout << "-1";
+        }
+        else
+        {
+            cout << sum;
+        }
+        cout << "\n";
+
+    }
     return 0;
 }

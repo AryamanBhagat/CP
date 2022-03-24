@@ -26,82 +26,63 @@ const int MOD3 = 998244353;
 const double pi = atan2(0, -1);
     
     
-bool palindrome(string s, int i, int j)
-{
-    if(j == i)
-    {
-        return true;
-    }
-    else if(j-i == 1)
-    {
-        return s[j] == s[i];
-    }
-    else 
-    {
-        return s[j] == s[i] && palindrome(s, i+1, j-1);
-    }
-}
+
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     int t;
     cin >> t;
+    //cout << " asdffgasdfg\n";
     while(t--)
     {
         int n;
         string s;
         cin >> n >> s;
+        int operation = 0;
         int i = 0;
-        int j = 0; 
-        int lbr = s[0] == '(' ? 1 : -1;
         int c = 0;
-        bool windowCanBeBalanced = lbr > 0;
-        //cout << lbr << '\n';
-        //string currentString = s.substr(0, 1);
-        //string currentReverseString = s.substr(0, 1);
-        for(j = 1; j < n; j++)
+        while(i < n)
         {
-
-            lbr += s[j] == '(' ? 1 : -1;
-            //currentString = currentString + s[j];
-            //currentReverseString = s[j] + currentReverseString;
-            //cout << currentString << " " << currentReverseString << " \n";
-            if(windowCanBeBalanced)
+            if(s[i] == '(')
             {
-                //cout << "asdfgasdfg " << lbr << endl;
-                if(!lbr)
+                if(i == n-1)
                 {
-                    //cout << "here\n";
-                    c++;
-                    i = j+1;
+                    c = 1;
+                    i++;
+                }
+                else
+                {
+                    i+=2;
+                    operation++;
+                }
+            }
+            if(s[i] == ')')
+            {
+                int j = i+1;
+                while(s[j] == '(' && j < n)
                     j++;
-                    if(i < n)
-                    {
-                        lbr = s[i] == '(' ? 1 : -1;
-                        windowCanBeBalanced = lbr > 0;
-                        //currentString = s.substr(i, 1);
-                        //currentReverseString = s.substr(i, 1);
-                    }
-                    continue;
-                }
-            }
-            //check if the current window is a palindrome
-            if(palindrome(s, i, j))
-            {
-                c++;
-                i = j+1;
-                j++;
-                if(i < n)
+
+                if(j < n-1)
                 {
-                    lbr = s[i] == '(' ? 1 : -1;
-                    windowCanBeBalanced = lbr > 0;
-                    //currentString = s.substr(i, 1);
-                    //currentReverseString = s.substr(i, 1);
+                    operation++;
+                    i = j+1;
+                }
+                if(j == n-1)
+                {
+                    c = 0;
+                    operation++;
+                    i = j+1;
+                }
+                
+                if(j == n)
+                {
+                    c = n-i;
+                    i = n;
                 }
             }
-        }   
-        cout << c << " " << n-i << '\n';
+        }
+        cout << operation << " " << c << "\n";
     }
     return 0;
 }

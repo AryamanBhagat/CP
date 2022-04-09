@@ -1,6 +1,6 @@
 // AryamanBhagat 
-// 2022-03-31 
-// 20:05:17
+// 2022-04-08 
+// 20:05:01
 
 #include <bits/stdc++.h>
 
@@ -33,16 +33,38 @@ int main(){
     cin >> t;
     while(t--)
     {
-        int n;
+        int n; 
         cin >> n;
-        string s;
-        cin >> s;
-        //either pluses are more
-        //either -ve are more
-        //either
-        
-        int t;
-        
+        int a[n];
+        unordered_map<int, int> umap;
+        int largest = 0;
+        rep(i, 0, n)
+        {
+            cin >> a[i];
+            if(umap.find(a[i]) == umap.end())
+            {
+                umap[a[i]] = 1;
+            }
+            else
+            {
+                umap[a[i]]++;
+            }
+            if(umap[a[i]] > largest)
+            {
+                largest = umap[a[i]];
+            }
+        }
+        int count = 0;
+        int out = largest;
+        while(largest < n)
+        {
+            count++;
+            largest = largest * 2;
+        }
+
+        //cout << "largest " << largest << "\n";
+
+        cout << count + (n-out) << "\n";
     }
     return 0;
 }

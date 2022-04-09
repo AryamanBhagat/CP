@@ -1,6 +1,6 @@
 // AryamanBhagat 
-// 2022-03-31 
-// 20:05:17
+// 2022-04-08 
+// 20:05:01
 
 #include <bits/stdc++.h>
 
@@ -35,14 +35,7 @@ int main(){
     {
         int n;
         cin >> n;
-        string s;
-        cin >> s;
-        //either pluses are more
-        //either -ve are more
-        //either
-        
-        int t;
-        
+        cout << n-3 << " 1 1 1" << "\n";
     }
     return 0;
 }

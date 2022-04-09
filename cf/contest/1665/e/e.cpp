@@ -1,6 +1,6 @@
 // AryamanBhagat 
-// 2022-03-31 
-// 20:05:17
+// 2022-04-08 
+// 20:05:01
 
 #include <bits/stdc++.h>
 
@@ -29,20 +29,6 @@ const double pi = atan2(0, -1);
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int t;
-    cin >> t;
-    while(t--)
-    {
-        int n;
-        cin >> n;
-        string s;
-        cin >> s;
-        //either pluses are more
-        //either -ve are more
-        //either
-        
-        int t;
-        
-    }
+    
     return 0;
 }

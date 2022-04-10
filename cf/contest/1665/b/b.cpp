@@ -36,7 +36,7 @@ int main(){
         int n; 
         cin >> n;
         int a[n];
-        unordered_map<int, int> umap;
+        map<int, int> umap;
         int largest = 0;
         rep(i, 0, n)
         {
@@ -54,17 +54,20 @@ int main(){
                 largest = umap[a[i]];
             }
         }
+
+        //largest;
         int count = 0;
         int out = largest;
         while(largest < n)
         {
-            count++;
-            largest = largest * 2;
+            int d = min(n - largest, largest);
+            count += 1 + d;
+            largest += d;
         }
 
         //cout << "largest " << largest << "\n";
 
-        cout << count + (n-out) << "\n";
+        cout << count  << "\n";
     }
     return 0;
 }

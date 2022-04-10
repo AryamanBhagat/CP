@@ -25,13 +25,88 @@ const int MOD3 = 998244353;
     
 const double pi = atan2(0, -1);
     
+int ans;
+
+void proc(vector<int>& a) {
+    //if it is empty then there are no more nodes to infect;
+    if (a.empty()) return;
+
+    int n = a.size();
+    int last = 0;
     
+    //find the largest element with highest index.
+    for (int i = 0; i < n; ++i) {
+        if (a[i] == a[0]) {
+            last = i;
+        } else {
+            break;
+        }
+    }
+    //subtract one
+    --a[last];
+    
+    //subtract one from all
+    //also one second has passed
+    for (int i = 0; i < n; ++i) --a[i];
+    ++ans;
+
+    //remove zeros
+    while (!a.empty() && a.back() <= 0) {
+        a.pop_back();
+    }
+
+    //call on itself;
+    proc(a);
+}
+
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
     
 
     int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        ans = 0;
+        for (int i = 1; i < n; ++i) {
+            int x;
+            cin >> x;
+            ++a[--x]; //how many children
+        }
+        a.emplace_back(1); //adding root
+        sort(a.rbegin(), a.rend());
+
+        //removing zeros
+        while (!a.empty() && a.back() <= 0) a.pop_back();
+        n = a.size();
+
+        //infecting once, also keeping track of how many children get infected
+        for (int i = 0; i < n; ++i) {
+            a[i] = a[i] - (n - i);
+            ++ans;
+        }
+
+        //sorting again.
+        sort(a.rbegin(), a.rend());
+
+        //removing zeros again.
+        while (!a.empty() && a.back() <= 0) a.pop_back();
+        
+
+        //simulating the rest?
+        proc(a);
+
+
+        cout << ans << '\n';
+    }
+    
+
+    /*int t;
     cin >> t;
     while(t--)
     {
@@ -94,6 +169,6 @@ int main(){
 
         //cout << m  << " " << minus << "\n";
         cout <<  elapsed + 1 + elapsedAfter<< "\n";
-    }
+    }*/
     return 0;
 }
